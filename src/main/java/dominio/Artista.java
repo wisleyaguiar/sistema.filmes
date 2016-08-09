@@ -1,11 +1,14 @@
 package dominio;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Artista {
+public class Artista implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	private Integer codArtista;
 	private String nome;
 	private String nacionalidade;
@@ -30,6 +33,91 @@ public class Artista {
 	
 	public void addParticipacao(Participacao participacao) {
 		participacoes.add(participacao);
+		participacao.setArtista(this);
 	}
+	
+	public void removeParticipacao(Participacao participacao){
+		participacoes.remove(participacao);
+	}
+
+	public Integer getCodArtista() {
+		return codArtista;
+	}
+
+	public void setCodArtista(Integer codArtista) {
+		this.codArtista = codArtista;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getNacionalidade() {
+		return nacionalidade;
+	}
+
+	public void setNacionalidade(String nacionalidade) {
+		this.nacionalidade = nacionalidade;
+	}
+
+	public BigDecimal getCache() {
+		return cache;
+	}
+
+	public void setCache(BigDecimal cache) {
+		this.cache = cache;
+	}
+
+	public Date getNascimento() {
+		return nascimento;
+	}
+
+	public void setNascimento(Date nascimento) {
+		this.nascimento = nascimento;
+	}
+
+	public List<Participacao> getParticipacoes() {
+		return participacoes;
+	}
+
+	public void setParticipacoes(List<Participacao> participacoes) {
+		this.participacoes = participacoes;
+	}
+
+	@Override
+	public String toString() {
+		return "Artista [codArtista=" + codArtista + ", nome=" + nome + ", nacionalidade=" + nacionalidade + ", cache="
+				+ cache + ", nascimento=" + nascimento + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((codArtista == null) ? 0 : codArtista.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Artista other = (Artista) obj;
+		if (codArtista == null) {
+			if (other.codArtista != null)
+				return false;
+		} else if (!codArtista.equals(other.codArtista))
+			return false;
+		return true;
+	}
+	
 	
 }
